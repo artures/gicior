@@ -13,7 +13,7 @@ class Manager extends CI_Controller {
 		$is_logged_in = $this->session->userdata('is_logged_in');
 		if (!isset($is_logged_in) || $is_logged_in != true)
 		{
-		echo 'Permision denied. Please log in <a href="http://www.ecwm604.us/w1284183/index.php/">Main menu</a> ';
+		echo 'Permision denied. Please log in <a href="http://www.ecwm604.us/w1284183/index.php/">Login</a> ';
 		
 		die();
 		}	
@@ -112,6 +112,40 @@ class Manager extends CI_Controller {
 	
 	
 	}	
+	
+	
+	function password_update()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('password1' , 'Password', 'trim|required|min_length[3]');
+		$this->form_validation->set_rules('password2' , 'Password Confirmed', 'trim|required|min_length[3]|matches[password1]');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('password_view');
+			
+		}
+		else
+		{
+			$this->load->model('manager_model'); // load manager model where db gets updated
+			if  ($query=$this->manager_model->update_password())
+			{
+				
+		
+			redirect('login/logout');	
+				
+			}
+			else 
+			{
+				$this->load->view('password_view');
+			}
+		
+		
+		}
+	
+	}	
+	
+	
 	
 	
 	

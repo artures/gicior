@@ -19,32 +19,24 @@
 <div class="container">
 
   <div class="content" >
-    <h1>Create employee profile</h1> 
+    <h1>Whats your employee ID?</h1> 
 
    	<hr style="width:50%;"/>
-    <?php echo form_open('manager/create'); ?>
+    <?php echo form_open('login/new_pass'); ?>
+    
+    
     <table class="login">
-    <tr>
-    	<td><label for="fname">First Name:</label></td>
-        <td><input type="text"  id="first_name" name="first_name" tabindex="1" > </td>	
-    </tr>
-    <tr>
-    	<td><label for="lastname">Surname:</label></td>
-        <td><input type="text"  id="last_name" name="last_name" tabindex="1" > </td>	
-    </tr>
     <tr>
     	<td><label for="eID">Employee ID:</label></td>
         <td><input type="text"  id="emp_no" name="emp_no" tabindex="2" > </td>	
-    </tr>       
+    </tr>   
+    
 
-    <tr>
-    	<td><label for="gender">Gender:</label></td>
-        <td><input type="text"  id="gender" name="gender" tabindex="2" > </td>	
-    </tr>
+    
 
     <tr>
     	<td></td>
-        <td><input value="submit" name="submit"  type="submit" class="green"><input  type="button" value="Back" class="green" onClick="history.back();"></td>
+        <td><input value="Search" name="submit"  type="submit" class="green"><input  type="button" value="Back" class="green" onClick="history.back();"></td>
     </tr>             
     
         
@@ -53,12 +45,18 @@
 
     
     </form>
-    
+    <?php if ($error==3) {?>
+	<h1>Seems like you already have a password</h1>
+<?php	} ?>
     <?php echo validation_errors(); ?>
-    <!-- end .content --></div>  <!-- end .container --></div>
+    
+    <!-- end .content --></div>
+
+  <!-- end .container --></div>
   <div class="footer">
     <p>Artur Sroka - University of Westminster @2012</p>
     <!-- end .footer --></div>
-
 </body>
 </html>
+
+<!--    

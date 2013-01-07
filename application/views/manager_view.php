@@ -25,11 +25,13 @@
     </p>
     
   <div class="links">
-  <a href="<?php echo base_url(); ?>index.php/find/findemp_adv" >Search database</a>
+  <a href="<?php echo base_url(); ?>index.php/find/findemp_adv" >Advanced Search</a>
   
   <a href="<?php echo base_url(); ?>index.php/manager/register" >Register employee</a>
   
    <a href="<?php echo base_url(); ?>index.php/manager/load"  >Update employee</a>
+   
+    <a href="<?php echo base_url(); ?>index.php/manager/password_update"  >Change password</a>
   	
    <a href="<?php echo base_url(); ?>index.php/login/logout"  >Logout</a> 
   
@@ -42,9 +44,10 @@
     
     
     <!-- end .content --></div>
-  <div class="footer">
+
+  <!-- end .container --></div>
+    <div class="footer">
     <p>Artur Sroka - University of Westminster @2012</p>
     <!-- end .footer --></div>
-  <!-- end .container --></div>
 </body>
 </html>

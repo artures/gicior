@@ -23,7 +23,9 @@
 
     
    
-   	
+   	<?php if ($error==2) {?>
+	<h1>Your password have been assigned, please log in.</h1>
+<?php	} ?>	
     <form action="validate_manager" method="POST">
     <table class="login">
     <tr>
@@ -38,19 +40,28 @@
     	<td></td>
         <td><input value="Login" name="submit"  type="submit" class="green"><input  type="button" value="Back" class="green" onClick="history.back();"></td>
     </tr>  
+      
     
-    
-    
+  
         
     </table>
     
     </form>
+     <p> <a href="<?php echo base_url(); ?>index.php/login/new_pass" >If you havent got your password, please click here</a></p>
+<?php if ($error==1) {?>
+	<p>Your username / password are incorrect.</p>
+<?php	} ?>
+
+
+	
+
 <?php echo validation_errors(); ?>
     
     <!-- end .content --></div>
-  <div class="footer">
+
+  <!-- end .container --></div>
+    <div class="footer">
     <p>Artur Sroka - University of Westminster @2012</p>
     <!-- end .footer --></div>
-  <!-- end .container --></div>
 </body>
 </html>

@@ -24,65 +24,61 @@
 <div class="container">
 
   <div class="content" >
-    <h1>Update employee profile</h1> 
+    <h1>You can change your password below.</h1> 
 
-	<div align="center"><h1>Please edit loaded Details</h1> 
-	<?php echo form_open('manager/update'); ?>
+	<div align="center">
+	<?php echo form_open('login/assign_pass'); ?>
     
 	<hr style="width:50%;"/>
     
     <table class="login">	
-			<?php	
-			if($loaded)
+
+					<?php	
+			if($emp_no)
 			{
-				foreach ($loaded as $r) 
+				foreach ($emp_no as $r) 
 				{
 					
 				
 				?>
-				
+						
    	
     <tr>
     	<td><label for="eID">Employee ID:</label></td>
         <td class="grey"><input class="grey" type="text"  id="emp_no" name="emp_no"  value="<?php echo $r->emp_no; ?>" readonly="readonly"> </td>	
     </tr>   
-        <tr>
-    	<td><label for="fname">First Name:</label></td>
-        <td><input type="text"  id="first_name" name="first_name" value="<?php echo $r->first_name; ?>" > </td>	
-    </tr>
-    <tr>
-    	<td><label for="lastname">Surname:</label></td>
-        <td><input type="text"  id="last_name" name="last_name" value="<?php echo $r->last_name; ?>" > </td>	
-    </tr>
-    
 
+        <tr>
+    	<td><label for="password">Password:</label></td>	
+        <td><input type="password"   name="password1"  > </td>	
+    </tr>
     <tr>
-    	<td><label for="gender">Gender:</label></td>
-        <td><input type="text"  id="gender" name="gender"  value="<?php echo $r->gender;  ?>"> </td>	
-    </tr> 
-    
+    	<td><label for="password2">Confirm Password:</label></td>
+        <td><input type="password"   name="password2"  > </td>	
+    </tr>
 
     <tr>
     	<td></td>
         <td><input value="Update" name="submit"  type="submit" class="green"><input  type="button" value="Back" class="green" onClick="history.back();"></td>
     </tr>             
+ 
+    </table>
+    
     <?php
      } 
 				
 			}
-			else {echo 'no results <input  type="button" value="Back" class="green" onClick="history.back();">';}
-			?>   
-    </table>
-    
-
+			
+			?>  
     
     </form>
     
     <?php echo validation_errors(); ?>
-    <!-- end .content --></div></div>  <!-- end .container --></div>
+    <!-- end .content --></div>
+    </div></div>
   <div class="footer">
     <p>Artur Sroka - University of Westminster @2012</p>
     <!-- end .footer --></div>
-
+ 
 </body>
 </html>

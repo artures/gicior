@@ -83,6 +83,7 @@ class Search_model extends CI_Model {
 			
 			
 			$this->db->join('salaries', 'employees.emp_no = salaries.emp_no');
+			
 			if($sal){$this->db->where('salary', $sal);}
 			
 				
@@ -103,7 +104,7 @@ class Search_model extends CI_Model {
 						$data[] = $row;
 						
 						} 				
-				return $data;
+				return array("count" => count($data), "results" =>$data);
 				
 			}
 		}

@@ -49,10 +49,11 @@
     <?php echo validation_errors(); ?>
     
     <!-- end .content --></div>
+
+  <!-- end .container --></div>
   <div class="footer">
     <p>Artur Sroka - University of Westminster @2012</p>
     <!-- end .footer --></div>
-  <!-- end .container --></div>
 </body>
 </html>
 

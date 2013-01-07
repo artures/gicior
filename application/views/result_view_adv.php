@@ -11,7 +11,7 @@
 	::webkit-selection{ background-color: #E13300; color: white; }
 
 	body {
-		background-color: #fff;
+		background-color: #e7ecf2;
 		margin: 40px;
 		font: 13px/20px normal Helvetica, Arial, sans-serif;
 		color: #4F5155;
@@ -36,7 +36,7 @@
 	code {
 		font-family: Consolas, Monaco, Courier New, Courier, monospace;
 		font-size: 12px;
-		background-color: #f9f9f9;
+		background-color: #e7ecf2;
 		border: 1px solid #D0D0D0;
 		color: #002166;
 		display: block;
@@ -66,7 +66,7 @@
 		-webkit-box-shadow: 0 0 8px #D0D0D0;
 	}
 	#container table {
-	width: 500px;
+	width: 700px;
 	margin:0 auto;
 }
     </style>
@@ -74,9 +74,9 @@
 <body>
 
 <div id="container">
-	   <!-- <?php if($rows_adv) {
-    echo  '<h1>SEARCH RUTURNED '. $rows_adv['count'] . ' RESULT(S)</h1> 
-    ?> -->
+	   <?php if($rows_adv) {
+    echo  '<h1>SEARCH RETURNED '. $rows_adv['count'] . ' RESULT(S)</h1> 
+   
     
     
 
@@ -85,11 +85,11 @@
             
             <div>
             <table>
-            <tr><td>First Name</td><td>Surname</td><td>ID</td><td>Title</td><td>Department</td><td>Salary</td></tr> '; } ?>
+            <tr><td>First Name</td><td>Surname</td><td>ID</td><td>Title</td><td>Department</td><td>Salary</td><td>From</td><td>To</td></tr> '; } ?>
             <?php 
 			
 			if($rows_adv){
-			foreach ($rows_adv as $r) 
+			foreach ($rows_adv['results'] as $r) 
 			{
 			echo '<tr>' ; 	
 			echo '<td>' . $r->first_name . '</td> ';
@@ -98,6 +98,8 @@
 			echo '<td>' . $r->title . '</td> ';
 			echo '<td>' . $r->dept_name . '</td>'  ;
 			echo '<td>' . $r->salary . '</td> ';
+			echo '<td>' . $r->from_date . '</td> ';
+			echo '<td>' . $r->to_date . '</td> ';
 			echo '</tr>' ;
 			}
 				

@@ -9,6 +9,11 @@
 <title>Human Reseources Admin System - Add employee</title>
 
 <link href="..\..\css\HR.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.grey #emp_no {
+	background-color: #CCC;
+}
+</style>
 </head>
 
 <body>
@@ -19,35 +24,36 @@
 <div class="container">
 
   <div class="content" >
-    <h1>Create employee profile</h1> 
+    <h1>You can change your password below.</h1> 
 
-   	<hr style="width:50%;"/>
-    <?php echo form_open('manager/create'); ?>
-    <table class="login">
-    <tr>
-    	<td><label for="fname">First Name:</label></td>
-        <td><input type="text"  id="first_name" name="first_name" tabindex="1" > </td>	
-    </tr>
-    <tr>
-    	<td><label for="lastname">Surname:</label></td>
-        <td><input type="text"  id="last_name" name="last_name" tabindex="1" > </td>	
-    </tr>
+	<div align="center">
+	<?php echo form_open('manager/password_update'); ?>
+    
+	<hr style="width:50%;"/>
+    
+    <table class="login">	
+
+				
+   	
     <tr>
     	<td><label for="eID">Employee ID:</label></td>
-        <td><input type="text"  id="emp_no" name="emp_no" tabindex="2" > </td>	
-    </tr>       
+        <td class="grey"><input class="grey" type="text"  id="emp_no" name="emp_no"  value="<?php print_r($this->session->userdata['emp_no']); ?>" readonly="readonly"> </td>	
+    </tr>   
 
+        <tr>
+    	<td><label for="password">Password:</label></td>	
+        <td><input type="password"   name="password1"  > </td>	
+    </tr>
     <tr>
-    	<td><label for="gender">Gender:</label></td>
-        <td><input type="text"  id="gender" name="gender" tabindex="2" > </td>	
+    	<td><label for="password2">Confirm Password:</label></td>
+        <td><input type="password"   name="password2"  > </td>	
     </tr>
 
     <tr>
     	<td></td>
-        <td><input value="submit" name="submit"  type="submit" class="green"><input  type="button" value="Back" class="green" onClick="history.back();"></td>
+        <td><input value="Update" name="submit"  type="submit" class="green"><input  type="button" value="Back" class="green" onClick="history.back();"></td>
     </tr>             
-    
-        
+ 
     </table>
     
 
@@ -55,10 +61,11 @@
     </form>
     
     <?php echo validation_errors(); ?>
-    <!-- end .content --></div>  <!-- end .container --></div>
+    <!-- end .content --></div>
+    </div></div>
   <div class="footer">
     <p>Artur Sroka - University of Westminster @2012</p>
     <!-- end .footer --></div>
-
+ 
 </body>
 </html>
