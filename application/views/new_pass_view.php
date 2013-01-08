@@ -19,7 +19,7 @@
 <div class="container">
 
   <div class="content" >
-    <h1>Whats your employee ID?</h1> 
+    <h1>Whats your manager ID?</h1> 
 
    	<hr style="width:50%;"/>
     <?php echo form_open('login/new_pass'); ?>

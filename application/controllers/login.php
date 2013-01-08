@@ -5,7 +5,7 @@ class Login extends CI_Controller {
 
 	function index()
 	{
-		if($this->session->userdata('is_logged_in'))
+		if($this->session->userdata('is_logged_in')) // chceck if user is logged in, if so redirects to manager area
 		{
 		
 		$this->load->view('manager_view');
@@ -22,12 +22,12 @@ class Login extends CI_Controller {
 		{
 				
 			$this->load->model('manager_model');
-			$query = $this->manager_model->validate();
-				$this->load->library('form_validation');
+			$query = $this->manager_model->validate(); // validate credentials
+				$this->load->library('form_validation'); // validates user input
 				$this->form_validation->set_rules('emp_no' , 'Employee ID:110022', 'required|integer');
 				$this->form_validation->set_rules('password' , 'Password :123', 'required|min_length[3]');
 		
-				if($this->form_validation->run() == FALSE)
+				if($this->form_validation->run() == FALSE) // if failed reload the view
 				{
 					
 					$this->index();
@@ -36,14 +36,14 @@ class Login extends CI_Controller {
 			
 				else {
 			
-				if (!$query)
+				if (!$query) // in case of failure display error
 				{
 					$data['error']=1; 
 					$this->load->view('login_view',$data);
 					
 				}
 					
-				else {
+				else { // else set session and load manager view
 					$data = array (
 						'emp_no'=>$this->input->post('emp_no'),
 						'is_logged_in'=> true );
@@ -61,7 +61,7 @@ class Login extends CI_Controller {
 		
 		
 		
-		function new_pass()
+		function new_pass() // this function loads new pass view and displays error in case the user already has a password assigned
 		{	$data['error']=0;
 			$this->load->library('form_validation');
 	
@@ -88,7 +88,7 @@ class Login extends CI_Controller {
 	
 		}
 	
-		function assign_pass()
+		function assign_pass() // assigns a password once validated
 	{
 		
 		$this->load->library('form_validation');
@@ -107,7 +107,7 @@ class Login extends CI_Controller {
 			{
 				
 			$data['error']=2;
-			$this->load->view('login_view',$data);	
+			$this->load->view('login_view',$data);	// once password assigned, show login paged with message
 				
 			}
 			else 

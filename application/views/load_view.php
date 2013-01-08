@@ -45,7 +45,9 @@
 
     
     </form>
-    
+<!--    <?php if ($error==4) {?>
+	<h1>Employee not found</h1>
+<?php	} ?> -->
     <?php echo validation_errors(); ?>
     
     <!-- end .content --></div>

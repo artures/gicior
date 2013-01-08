@@ -57,18 +57,44 @@ class Manager_model extends CI_Model {
 		'first_name' => $this->input->post('first_name'),
 		'last_name' => $this->input->post('last_name'),
 		'emp_no' => $this->input->post('emp_no'),
-		'gender' => $this->input->post('gender')
+		'gender' => $this->input->post('gender'),
+		'birth_date' => $this->input->post('birth_date'),
+		'hire_date' => $this->input->post('hire_date')
+		);
+		
+		$new_titles_insert_data = array (
+		'title' => $this->input->post('title'),
+		'emp_no' => $this->input->post('emp_no')
+			);
+		
+		$new_salaries_insert_data = array (
+		'salary' => $this->input->post('salary'),
+		'emp_no' => $this->input->post('emp_no'),
+		'from_date' => $this->input->post('hire_date')
+		
 		
 		);
-			
-		$employee = $this->db->insert('employees', $new_emp_insert_data);	
-		return $employee; // returns true if db updated
+		$new_dept_emp_insert_data = array (
+		'emp_no' => $this->input->post('emp_no'),
+		'dept_no' => $this->input->post('dept_no'),
+		'from_date' => $this->input->post('hire_date'),
+
+		
+		); 
+		
+
+		$employee = $this->db->insert('employees', $new_emp_insert_data);
+		$titles = $this->db->insert('titles', $new_titles_insert_data);
+		$salaries = $this->db->insert('salaries', $new_salaries_insert_data);
+		$dept_emp = $this->db->insert('dept_emp', $new_dept_emp_insert_data);
+		/*$salaries = $this->db->insert('titles', $new_titles_insert_data);	
+		$dept_emp = $this->db->insert('titles', $new_titles_insert_data);	*/	
+		return array("employee" => $employee, "titles" =>$titles, "salaries" => $salaries , "dept_emp"=> $dept_emp); // returns true if db updated
 		}
 		
 		
 		
 
-		
 		
 		
 		
@@ -111,7 +137,7 @@ class Manager_model extends CI_Model {
 						$data[] = $row;
 						
 					} 				
-				return $data;
+				return $data; // returns employee data to be passed onto udpate view 
 				
 			}
 			}
@@ -135,7 +161,7 @@ class Manager_model extends CI_Model {
 						$data[] = $row;
 						
 					} 				
-				return $data;
+				return $data; // returns employee data where password is empty, passed later to assign password view, for first time logins of managers
 				
 			}
 			}

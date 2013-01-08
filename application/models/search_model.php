@@ -69,7 +69,7 @@ class Search_model extends CI_Model {
 			$jobt = $this->input->post('jobtitle');
 			$sal = $this->input->post('sal');
 			
-			if ($fname || $sname || $dept || $jobt || $sal || $emp_ID    )
+			if (!empty($fname) || !empty($sname) || !empty($dept) || !empty($jobt) || !empty($sal) || !empty($emp_ID)    )
 			{
 			$this->db->from('employees');
 			if ($fname) {$this->db->where('first_name', $fname);}
@@ -86,15 +86,7 @@ class Search_model extends CI_Model {
 			
 			if($sal){$this->db->where('salary', $sal);}
 			
-				
-			
-			
-			
-			
-			
-		
-			
-			
+
 			
 			$query = $this->db->get();
 
@@ -104,7 +96,7 @@ class Search_model extends CI_Model {
 						$data[] = $row;
 						
 						} 				
-				return array("count" => count($data), "results" =>$data);
+				return array("count" => count($data), "results" =>$data); // returns number of results and results 
 				
 			}
 		}

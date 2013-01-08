@@ -6,6 +6,7 @@ class Manager extends CI_Controller {
 	{
 		parent::__construct();
 		$this->is_logged_in();
+		
 	}
 	 
 	 	function is_logged_in()
@@ -18,7 +19,7 @@ class Manager extends CI_Controller {
 		die();
 		}	
 	}
-	function menu()
+	function menu() // manager area menu
 	{
 		$hello = $this->session->userdata('emp_no');
 		$this->load->view('manager_view', $hello);
@@ -27,46 +28,64 @@ class Manager extends CI_Controller {
 	
 
 	
-	function register()
+	function register() // loads create new employee view
 	{
-		$this->load->view('register_view');
+		$data['error']= 0;	
+		$this->load->view('register_view',$data);
 	
 	}
-	function create()
+	function create()  // creates new employee includes form validation
 	{
+		$data['error']= 0;
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('first_name' , 'Name', 'trim|required|alpha');
 		$this->form_validation->set_rules('last_name' , 'Surname', 'trim|required|alpha');
-		$this->form_validation->set_rules('emp_no' , 'Employee number', 'trim|required|min_length[6]|max_length[6]|integer');
+		$this->form_validation->set_rules('emp_no' , 'Employee number', 'trim|required|exact_length[6]|integer|is_unique[employees.emp_no]');
 		$this->form_validation->set_rules('gender' , 'Gender', 'trim|required|exact_length[1]|alpha');
-
-		if($this->form_validation->run() == FALSE){
-			$this->load->view('register_view');
+		$this->form_validation->set_rules('title' , 'Title', 'required');
+		$this->form_validation->set_rules('dept_no' , 'Department', 'required');
+		$this->form_validation->set_rules('salary' , 'Salary', 'required|integer');
+		if($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('register_view',$data);
 			
 		}
 		else
+		
 		{
-			$this->load->model('manager_model'); // load manager model where db gets updated
-			if  ($query=$this->manager_model->create_emp()){
-				$this->load->view('success_view');
-			}
-			else {
-				$this->load->view('register_view');
+			$this->load->model('manager_model'); 
+			$query=$this->manager_model->create_emp();							
+			if (!$query) // in case of failure display error
+				{
+					
+					$data['error']=9; 
+					$this->load->view('register_view',$data);
+					
+				}
+					
+				else 
+				{
+				$data['error']=5;
+				$this->load->view('register_view',$data);
 				
 				}
-				
+			// load manager model where db gets updated
+			
 		}
+			
+				
+		
 		
 		
 	
 	
 	}
 	
-		function load()
+		function load() // loads employee data into update view
 		{
 			$this->load->library('form_validation');
 	
-			$this->form_validation->set_rules('emp_no' , 'Employee number', 'trim|required|min_length[5]|max_length[6]');
+			$this->form_validation->set_rules('emp_no' , 'Employee number', 'trim|required|integer|min_length[5]|max_length[6]');
 	
 			if($this->form_validation->run() == FALSE){
 				$this->load->view('load_view');
@@ -83,7 +102,7 @@ class Manager extends CI_Controller {
 	
 		}
 	
-	function update()
+	function update() // updates employee data function includes form validation
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('first_name' , 'Name', 'trim|required|alpha');
@@ -91,20 +110,25 @@ class Manager extends CI_Controller {
 		$this->form_validation->set_rules('emp_no' , 'Employee number', 'trim|required|min_length[5]|max_length[6]|integer');
 		$this->form_validation->set_rules('gender' , 'Gender', 'trim|required|exact_length[1]|alpha');
 
-		if($this->form_validation->run() == FALSE){
+		if($this->form_validation->run() == FALSE)
+		{
 			$this->load->view('update_view');
 			
 		}
 		else
 		{
+		
+			
 			$this->load->model('manager_model'); // load manager model where db gets updated
-			if  ($query=$this->manager_model->update_emp()){
+			if  ($query=$this->manager_model->update_emp())
+			{
 				$this->load->view('success_view');
 			}
-			else {
+			else 
+			{
 				$this->load->view('update_view');
 				
-				}
+			}
 				
 		}
 		
@@ -114,7 +138,7 @@ class Manager extends CI_Controller {
 	}	
 	
 	
-	function password_update()
+	function password_update() // change password for manager
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('password1' , 'Password', 'trim|required|min_length[3]');

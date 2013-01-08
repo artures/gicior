@@ -104,9 +104,13 @@
 			}
 				
 				}
-				else {
-					echo 'no results';
+				else 
+				{
+					if($error==8)
+					{
+					echo '<h1>No results</h1>';
 					}
+				}
 				?> 
             
             
